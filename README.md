@@ -31,6 +31,32 @@
 - 攻略管理
 - 路线管理
 
+## 界面展示
+
+### 前台页面
+
+**攻略列表**
+
+![前台-攻略列表](screenshots/front-strategy.png)
+
+**路线列表**
+
+![前台-路线列表](screenshots/front-route.png)
+
+**景点列表**
+
+![前台-景点列表](screenshots/front-attractions.png)
+
+### 后台管理
+
+**酒店管理**
+
+![后台-酒店管理](screenshots/admin-hotel.png)
+
+**景点管理**
+
+![后台-景点管理](screenshots/admin-attractions.png)
+
 ## 快速开始
 
 ### 环境要求
