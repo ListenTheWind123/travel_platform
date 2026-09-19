@@ -1,94 +1,92 @@
-<center><h2>旅游管理系统demo</h2></center>
+# 重庆南山景区旅游系统
 
-## 1. Demo简介
+一个基于 Spring Boot 的景区旅游管理平台，提供景区攻略、游玩路线、酒店与景点的在线浏览、收藏关注和预订功能，并配套完整的后台管理系统。
 
-本demo基于SpringBoot+JPA+Thymeleaf实现，MySQL数据持久化的旅游管理小demo。前后端页面分离的传统CRUD小项目。
+## 项目简介
 
-![QQ截图20210513153030](https://tuyong.oss-cn-hangzhou.aliyuncs.com/img/20210513154936.png)
+本系统是一个前后端分离的传统 CRUD 项目，面向游客提供重庆南山景区的游玩攻略、路线推荐、酒店与景点在线预订等服务；面向管理员提供用户、酒店、景点、攻略、路线等信息的统一管理。
 
-### 1.1 技术应用
+## 技术栈
 
-* SpringBoot
-* Spring Data JPA
-* Thymeleaf
-* MySQL
+- **后端**：Spring Boot、Spring Data JPA、Thymeleaf
+- **前端**：Bootstrap、jQuery、Layui
+- **数据库**：MySQL
+- **构建工具**：Maven
 
-### 1.2 数据库
+## 功能模块
 
-![QQ截图20210513152937](https://tuyong.oss-cn-hangzhou.aliyuncs.com/img/20210513155248.png)
+### 前台（游客端）
 
-## 2. Demo页面演示
+- 用户注册、登录、个人信息与密码修改
+- 游玩路线查询、详情查看与关注
+- 游玩攻略查询、详情查看、收藏与发布
+- 酒店、景点查询与在线预订
+- 我的关注、收藏、预订列表管理
 
-### 2.1 前台用户登入
+### 后台（管理员端）
 
-前台用户和密码到数据库中查询
+- 用户管理
+- 酒店管理
+- 景点管理
+- 攻略管理
+- 路线管理
 
-![QQ截图20210513153042](https://tuyong.oss-cn-hangzhou.aliyuncs.com/img/20210513155517.png)
+## 快速开始
 
-路线列表
+### 环境要求
 
-![QQ截图20210513153111](https://tuyong.oss-cn-hangzhou.aliyuncs.com/img/20210513155700.png)
+- JDK 8
+- Maven 3.x
+- MySQL 5.7+
 
-攻略列表
+### 运行步骤
 
-![QQ截图20210513153142](https://tuyong.oss-cn-hangzhou.aliyuncs.com/img/20210513155739.png)
+1. 创建数据库并导入初始化脚本：
 
-酒店列表
+   ```sql
+   source sql/travel.sql;
+   ```
 
-![QQ截图20210513153157](https://tuyong.oss-cn-hangzhou.aliyuncs.com/img/20210513155758.png)
+2. 修改数据库连接配置（`src/main/resources/application.yml`）：
 
-景点列表
+   ```yaml
+   spring:
+     datasource:
+       username: root
+       password: '123456'
+       url: jdbc:mysql://localhost:3306/travel?characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+   ```
 
-![QQ截图20210513153222](https://tuyong.oss-cn-hangzhou.aliyuncs.com/img/20210513155821.png)
+3. 启动项目：
 
-在线预订列表
+   ```bash
+   mvn spring-boot:run
+   ```
 
-![QQ截图20210513153236](https://tuyong.oss-cn-hangzhou.aliyuncs.com/img/20210513155846.png)
+4. 访问系统：
 
-### 2.2 后台管理员登入
+   - 前台首页：`http://localhost:8080/travel`
+   - 后台管理：`http://localhost:8080/travel/system/login`
 
-后台管理员admin。密码admin。
+   默认后台管理员账号：`admin`，密码：`admin`。
 
-![QQ截图20210513153308](https://tuyong.oss-cn-hangzhou.aliyuncs.com/img/20210513160044.png)
+## 目录结构
 
-酒店管理
-
-![QQ截图20210513153333](https://tuyong.oss-cn-hangzhou.aliyuncs.com/img/20210513160123.png)
-
-景点管理
-
-![QQ截图20210513153355](https://tuyong.oss-cn-hangzhou.aliyuncs.com/img/20210513160216.png)
-
-攻略管理
-
-![QQ截图20210513153422](https://tuyong.oss-cn-hangzhou.aliyuncs.com/img/20210513160240.png)
-
-路线管理
-
-![QQ截图20210513153435](https://tuyong.oss-cn-hangzhou.aliyuncs.com/img/20210513160257.png)
-
-## 3. 程序简介
-
-### 3.1 配置文件
-
-MySQL配置略。。。JPA和端口配置如下：
-
-```yml
-  jpa:
-    show-sql: true
-  thymeleaf:
-    prefix: classpath:/templates/
-    suffix: .html
-    mode: LEGACYHTML5
-    encoding: UTF-8
-    cache: false
-
-server:
-  servlet:
-    context-path: /travel
-  port: 80
+```
+travel_platform
+├── sql/                 # 数据库初始化脚本
+├── src/main/java/       # Java 源码
+│   └── com/power/travel
+│       ├── controller/  # 控制层
+│       ├── service/     # 业务层
+│       ├── repository/  # 数据访问层
+│       ├── model/       # 实体模型
+│       ├── core/        # 通用返回结果与异常
+│       ├── enums/       # 枚举定义
+│       └── util/        # 工具类
+└── src/main/resources/  # 配置、模板与静态资源
 ```
 
-## 4. 总结
+## 许可证
 
-标准的SpringBoot + JPA+Thymeleaf实现的CRUD小项目，MySQL数据持久化。感兴趣的同学拿去改改学习。
+本项目仅用于学习交流，感兴趣的同学可自行下载学习。
