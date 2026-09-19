@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>重庆南山景区旅游系统</title>
+    <style>
+        body {
+            text-align: center;/* 应用该样式的元素中的文本内容进行水平居中对齐 */
+            /* 添加背景图 */
+            background-image: url('static/images/bg-bgsys-login.jpg'); /* 替换为实际图片路径 */
+            background-size: cover; /* 覆盖整个元素区域 */
+            background-position: center; /* 背景图像居中 */
+            background-repeat: no-repeat; /* 防止背景图像重复 */
+            background-color: #CEF3CEFF;/* 设置背景颜色为浅绿色，以便在背景图像加载之前有一个颜色 */
+        }
+        /* 登录表单内容 */
+        .login-container {
+            width: 300px;
+            margin: 100px auto;
+            padding: 20px;
+            background: #fff;/*设置元素的背景颜色为白色*/
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- 行div，clearfix类用于清除浮动，确保布局不会因为浮动元素而破坏 -->
+    <div class="row clearfix">
+        <!-- 列div，col-md-12表示在中等屏幕及以上时，该列占满12个栅格宽度 -->
+        <div class="col-md-12 column">
+            <h1>重庆南山景区旅游系统后台管理系统</h1>
+            <!-- 登录容器div，用于包裹登录表单 -->
+            <div class="login-container">
+                <form method="post" id="form-submit" name="form-submit">  <!--//调用控制层-->
+                    <div class="form-group">
+                        <label>账号</label>
+                        <input name="username" id="username" type="text" />
+                    </div>
+                    <div class="form-group">
+                        <label>密码</label>
+                        <input name="password" id="password" type="password" />
+                    </div>
+                    <!-- 提交按钮button，点击时调用saveForm函数 -->
+                    <button type="button" class="button" onclick="saveForm()">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--main js files 所有可能用到的js-->
+    <script th:src="@{/js/jquery_min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/wow.min.js}"></script>
+    <script th:src="@{/js/custom.js}"></script>
+    <script th:src="@{/plugins/slider-pro/js/jquery.sliderPro.min.js}"></script>
+    <script th:src="@{/plugins/owlcarousel/js/owl.carousel.min.js}"></script>
+    <script th:src="@{/layer/layer.js}"></script>
+    <!--js code-->
+    <script th:inline="javascript">
+        // 定义saveForm函数，用于处理表单提交
+        function saveForm() {
+            $.ajax({
+                url: '/travel/system/login',// 请求的URL
+                data: $("#form-submit").serialize(),// 发送的数据，通过序列化表单元素获得
+                type: 'post',// 请求类型为post
+                dataType: 'json',// 预期服务器返回的数据类型为json
+                // 请求成功时的回调函数
+                success: function (result) {
+                    if (result.code == 200) {
+                        // 跳转到用户列表页面
+                        window.location.href = "/travel/system/userListUI";
+                    } else {
+                        // 否则弹出错误信息
+                        alert(result.message);
+                    }
+                }
+            })
+        }
+    </script>
+</div>
+</body>
+</html>
+
